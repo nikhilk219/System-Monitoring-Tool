@@ -7,7 +7,7 @@ This program is a system monitoring tool written in C, designed to provide real-
 **How to run the program:**
 
 Compilation: Compile by using the command "gcc -Wall -Werror -std=c99 A1.c -lm -o myMonitoringTool" into the terminal.
-Positional Arguemnts and Assumptions:
+Positional Arguements and Assumptions:
 - CLA Syntax: ./myMonitoringTool [samples [tdelay]] [--memory] [--cpu] [--cores] [--samples=N] [--tdelay=T]
 - Default values for samples is 20 and tdelay is 500000 microseconds.
 - If the user does not specify any arguements (only enters ./myMonitoringTool), the program will display memory utilization, cpu utilization, and cores with the default values for samples and tdelay.
