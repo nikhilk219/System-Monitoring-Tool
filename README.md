@@ -1,10 +1,11 @@
-System Monitoring Tool
-Nikhil Kaku
+System Monitoring Tool - Nikhil Kaku
 
-About the program
+About the program:
+
 This program is a system monitoring tool written in C, designed to provide real-time insights into CPU/Memory utilization, and processor core details. It collects system information using POSIX system calls and reads from procfs and sysfs within linux to extract CPU statistics, memory usage, and processor frequency.
 
-How to run the program
+How to run the program:
+
 Compilation: Compile by using the command "gcc -Wall -Werror -std=c99 A1.c -lm -o myMonitoringTool" into the terminal.
 Positional Arguemnts and Assumptions:
 - CLA Syntax: ./myMonitoringTool [samples [tdelay]] [--memory] [--cpu] [--cores] [--samples=N] [--tdelay=T]
@@ -19,7 +20,8 @@ Example: ./myMonitoringTool 50 700000 will run the program with 50 samples and 7
 Example: ./myMonitoringTool 65 650000 --cores --cpu --tdelay=500000 --samples=30 --samples=55 will run the program displaying cpu utilization and cores with 55 samples and 500000 tdelay (values of samples and tdelay can be overwritten by repeated flags)
 
 
-How I solved the problem
+How I solved the problem:
+
 Parsing
 - In order to parse the command line arguements, I utilized boolean variables that represented each display flag (memory graph, cpu graph, cores) and also for determining whether a flag was read or not (in order to make sure that positional arguements are not passed after flags). I also created int/long variables that contained the # of samples and tdelay (defaulted to 20 and 500000 respectively).
 - I checked if whether any of the display flag booleans were true and if they were, I would proceed to display the information of that flag after the parsing was finished.
@@ -29,13 +31,15 @@ Graphs
 - Each row represents some partition of the total utilization of the graph (each partition is 10% in CPU graph while each partiton is 1/12th of the total ram in the memory graph). Each column represents a specific sample number.
 - This apporoach allowed me to easily update the graph for each sample as I would just need to index into the appropriate spot in the array. It also allowed me to easily print the graph as I would just need to iterate through the entire array.
 
-Retrieving System Information
+Retrieving System Information:
+
 - I accessed the sysinfo struct to retrieve information about ram.
 - I accessed the /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq file to retrieve the max frequency of the CPU.
 - I accessed the /proc/stat file and parsed the first line of the file to get CPU times and calculate the CPU utilization.
 - I used the sysconf and passed in _SC_NPROCESSORS_CONF POSIX to get the total amount of cores configured in the system.
 
-Overview of functions
+Overview of functions:
+
 - void print_core_row(int num_cores);
 A helper function to print_cores that prints 'num_cores' cores in a single row on the screen.
 
@@ -88,6 +92,7 @@ A helper function for parsing the command line arguements. Depending on what fla
 5. If the cores is to be displayed, display the number of cores as well as the max frequency of the cores. 
 6. Terminate the program
 
-Extra Notes
+Extra Notes:
+
 - The program assumes that the number of samples will be so that it fits in the terminal width
 
